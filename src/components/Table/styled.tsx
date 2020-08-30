@@ -24,3 +24,8 @@ export const Td = styled.td`
   text-align: left;
   padding: 8px;
 `;
+
+export const EditBtn = styled.div`
+  width: fit-content;
+  transform: rotate(90deg);
+`;

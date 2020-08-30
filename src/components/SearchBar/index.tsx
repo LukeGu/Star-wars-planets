@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 // import styled from "styled-components";
 import axios from "axios";
+// interface
+import { PlanetValue } from "../../interface";
+// utils
+import { formatData } from "../../util";
 
-const SearchBar = () => {
+const SearchBar = (props: { getSearchPlanets: (data: PlanetValue[]) => void }) => {
   const [searchText, setSearchText] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -11,11 +15,13 @@ const SearchBar = () => {
       method: "get",
       url: `https://swapi.dev/api/planets/?search=${searchText}`,
       responseType: "stream",
-    }).then(function (response) {
-      console.log("results", response);
-    });
+    })
+      .then((data) => {
+        props.getSearchPlanets(formatData(data));
+      })
+      .catch((err) => console.log("err", err.message));
   };
-  console.log("input", searchText);
+
   return (
     <form onSubmit={handleSubmit}>
       <input type="text" onChange={(e) => setSearchText(e.target.value)} />

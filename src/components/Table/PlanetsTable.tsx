@@ -1,16 +1,11 @@
 import React from "react";
 // import styled from "styled-components";
 // components
-import { Table, Tr, Th, Td } from "./styled";
-
-interface PlanetValue {
-  name: string;
-  population: string;
-  climate: string;
-}
+import { Table, Tr, Th, Td, EditBtn } from "./styled";
+// interface
+import { PlanetValue } from "../../interface";
 
 const PlanetsTable = (props: { planets: PlanetValue[] }) => {
-  console.log("table", props.planets);
   return (
     <Table>
       <Tr>
@@ -25,7 +20,9 @@ const PlanetsTable = (props: { planets: PlanetValue[] }) => {
             <Td>{planet.name}</Td>
             <Td>{planet.population}</Td>
             <Td>{planet.climate}</Td>
-            <Td>&gt;</Td>
+            <Td style={{ display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer" }}>
+              <EditBtn>&gt;</EditBtn>
+            </Td>
           </Tr>
         ))}
     </Table>

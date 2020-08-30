@@ -6,7 +6,7 @@ import { PageLayout, LogoHeader, PlanetButton } from "../../components/index";
 const PlanetsLink = styled.a``;
 
 const HomePage = () => (
-  <PageLayout title="Star wars - home">
+  <PageLayout title="Star wars - Home">
     <LogoHeader />
     <PlanetsLink href="/planets">
       <PlanetButton />

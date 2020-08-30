@@ -1,11 +1,12 @@
 import React from "react";
-// import styled from "styled-components";
 // components
 import { Table, Tr, Th, Td, EditBtn } from "./styled";
 // interface
 import { PlanetValue } from "../../interface";
 
-const PlanetsTable = (props: { planets: PlanetValue[] }) => {
+const EditTd = { display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer" };
+
+const PlanetsTable = (props: { planets: PlanetValue[]; onEdit: (data: PlanetValue) => void }) => {
   return (
     <Table>
       <Tr>
@@ -20,7 +21,7 @@ const PlanetsTable = (props: { planets: PlanetValue[] }) => {
             <Td>{planet.name}</Td>
             <Td>{planet.population}</Td>
             <Td>{planet.climate}</Td>
-            <Td style={{ display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer" }}>
+            <Td style={EditTd} onClick={() => props.onEdit(planet)}>
               <EditBtn>&gt;</EditBtn>
             </Td>
           </Tr>

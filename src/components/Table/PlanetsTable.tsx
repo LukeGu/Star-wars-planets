@@ -17,7 +17,7 @@ const PlanetsTable = (props: { planets: PlanetValue[]; onEdit: (data: PlanetValu
       </Tr>
       {props.planets.length > 0 &&
         props.planets.map((planet: PlanetValue) => (
-          <Tr key={planet.name}>
+          <Tr key={planet.url}>
             <Td>{planet.name}</Td>
             <Td>{planet.population}</Td>
             <Td>{planet.climate}</Td>

@@ -10,7 +10,7 @@ import { formatData } from "../../util";
 
 const PlanetsPage = () => {
   const [planetsData, setPlanetsData] = useState<PlanetValue[]>([]);
-  const [selectedPlanet, setSelectedPlanet] = useState<PlanetValue>({ name: "", population: "", climate: "" });
+  const [selectedPlanet, setSelectedPlanet] = useState<PlanetValue>({ name: "", population: "", climate: "", url: "" });
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   useEffect(() => {
@@ -44,7 +44,7 @@ const PlanetsPage = () => {
     setIsModalOpen(false);
     const tmpData = [...planetsData];
     tmpData.splice(
-      tmpData.findIndex((planet) => planet.name === data.name),
+      tmpData.findIndex((planet) => planet.url === data.url),
       1,
       data
     );

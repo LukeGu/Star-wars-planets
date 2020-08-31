@@ -40,7 +40,7 @@ export const ModalContent = styled.div`
 `;
 
 export const Backdrop = styled.div`
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.5);
   position: fixed;
   z-index: 1040;
   display: block;

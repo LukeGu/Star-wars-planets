@@ -42,6 +42,7 @@ const PlanetForm = (props: {
           id="name"
           name="name"
           value={details.name}
+          maxLength={10}
           onChange={(e: ChangeEvent) => handleUpdateInfo(e)}
         />
       </FormItem>

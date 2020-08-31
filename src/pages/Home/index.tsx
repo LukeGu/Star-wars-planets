@@ -1,16 +1,12 @@
 import React from "react";
-import styled from "styled-components";
 //components
-import { PageLayout, LogoHeader, PlanetButton } from "../../components/index";
-
-const PlanetsLink = styled.a``;
+import { PageLayout, PlanetButton } from "../../components/index";
 
 const HomePage = () => (
-  <PageLayout title="Star wars - Home">
-    <LogoHeader />
-    <PlanetsLink href="/planets">
+  <PageLayout title="Star wars - Home" isHome>
+    <a href="/planets">
       <PlanetButton />
-    </PlanetsLink>
+    </a>
   </PageLayout>
 );
 

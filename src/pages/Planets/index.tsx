@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 // components
 import { PageLayout, SearchBar, PlanetsTable, Pagination, Modal, PlanetForm } from "../../components/index";
+import { TitleSection, Title } from "./styled";
 // interface
 import { PlanetValue } from "../../interface";
 // utils
@@ -53,7 +54,11 @@ const PlanetsPage = () => {
 
   return (
     <PageLayout title="Star wars - Planets">
-      <SearchBar getSearchPlanets={handleSearchPlanets} />
+      <TitleSection>
+        <Title>star wars planets</Title>
+        <SearchBar getSearchPlanets={handleSearchPlanets} />
+      </TitleSection>
+
       <PlanetsTable planets={planetsData} onEdit={handleSelectPlanet} />
       <Pagination totalNum={6} currentNum={pageNumber} getPageNumber={handleGetPageNumber} />
       {isModalOpen && (

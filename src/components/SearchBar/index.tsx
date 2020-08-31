@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-// import styled from "styled-components";
 import axios from "axios";
 // interface
 import { PlanetValue } from "../../interface";
+// components
+import { SearchForm, SearchInput, SearchBtn } from "./styled";
 // utils
 import { formatData } from "../../util";
 
@@ -23,10 +24,15 @@ const SearchBar = (props: { getSearchPlanets: (data: PlanetValue[]) => void }) =
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" onChange={(e) => setSearchText(e.target.value)} />
-      <button type="submit">Search</button>
-    </form>
+    <SearchForm onSubmit={handleSubmit}>
+      <SearchInput
+        type="text"
+        placeholder="Search Planets"
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+      />
+      <SearchBtn type="submit" />
+    </SearchForm>
   );
 };
 

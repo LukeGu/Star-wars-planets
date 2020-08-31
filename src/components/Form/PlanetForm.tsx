@@ -1,20 +1,28 @@
 import React, { useState, ChangeEvent } from "react";
 // components
-import { FormItem } from "./styled";
+import { FormItem, FormFooter } from "./styled";
+import { SquareButton as Button } from "../../components/index";
 // interface
 import { PlanetValue } from "../../interface";
 
-const PlanetForm = (props: { planetDetails: PlanetValue }) => {
+const PlanetForm = (props: {
+  planetDetails: PlanetValue;
+  onSubmitForm: (data: PlanetValue, e: React.FormEvent) => void;
+  onCloseModal: () => void;
+}) => {
   const [details, setDetails] = useState<PlanetValue>(props.planetDetails);
-  console.log("PlanetForm", details);
-
+  //   console.log("PlanetForm", details);
   const handleUpdateInfo = (e: ChangeEvent) => {
     const element = e.currentTarget as HTMLInputElement;
     let newValue;
     if (element.name === "climate") {
-      newValue = details.climate;
-      if (newValue.includes(element.value)) newValue = newValue.replace(element.value.toString(), "");
-      else newValue += `, ${element.value}`;
+      const climateArray = details.climate === "" ? [] : details.climate.split(", ");
+      if (details.climate.includes(element.value))
+        newValue = climateArray.filter((item) => item !== element.value.toString()).join(", ");
+      else {
+        climateArray.push(element.value.toString());
+        newValue = climateArray.length === 1 ? climateArray.join("") : climateArray.join(", ");
+      }
     } else {
       newValue = element.value;
     }
@@ -26,7 +34,7 @@ const PlanetForm = (props: { planetDetails: PlanetValue }) => {
   };
 
   return (
-    <form>
+    <form onSubmit={(e: React.FormEvent) => props.onSubmitForm(details, e)}>
       <FormItem>
         <label htmlFor="name">Planet name:</label>
         <input
@@ -95,6 +103,10 @@ const PlanetForm = (props: { planetDetails: PlanetValue }) => {
         />
         <label htmlFor="climate4"> Murky</label>
       </FormItem>
+      <FormFooter>
+        <Button type="submit">Submit</Button>
+        <Button onClick={props.onCloseModal}>Cancel</Button>
+      </FormFooter>
     </form>
   );
 };

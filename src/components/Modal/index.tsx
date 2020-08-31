@@ -1,7 +1,6 @@
 import React from "react";
 // components
-import { SquareButton as Button } from "../../components/index";
-import { ModalWrapper, ModalBody, ModalHeader, ModalContent, ModalFooter, ModalTitle, Backdrop } from "./styled";
+import { ModalWrapper, ModalBody, ModalHeader, ModalContent, ModalTitle, Backdrop } from "./styled";
 
 const Modal = (props: { onClose: () => void; children: React.ReactNode }) => {
   return (
@@ -14,10 +13,6 @@ const Modal = (props: { onClose: () => void; children: React.ReactNode }) => {
           </button>
         </ModalHeader>
         <ModalContent>{props.children}</ModalContent>
-        <ModalFooter>
-          <Button onClick={props.onClose}>Submit</Button>
-          <Button onClick={props.onClose}>Cancel</Button>
-        </ModalFooter>
       </ModalBody>
       <Backdrop onMouseDown={props.onClose} />
     </ModalWrapper>

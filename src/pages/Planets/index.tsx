@@ -38,6 +38,19 @@ const PlanetsPage = () => {
     setIsModalOpen(true);
   };
 
+  const handleSubmitForm = (data: PlanetValue, e: React.FormEvent) => {
+    e.preventDefault();
+    setIsModalOpen(false);
+    const tmpData = [...planetsData];
+    tmpData.splice(
+      tmpData.findIndex((planet) => planet.name === data.name),
+      1,
+      data
+    );
+    setPlanetsData(tmpData);
+    console.log("new planet info", data);
+  };
+
   return (
     <PageLayout title="Star wars - Planets">
       <SearchBar getSearchPlanets={handleSearchPlanets} />
@@ -45,7 +58,11 @@ const PlanetsPage = () => {
       <Pagination totalNum={6} currentNum={pageNumber} getPageNumber={handleGetPageNumber} />
       {isModalOpen && (
         <Modal onClose={() => setIsModalOpen(false)}>
-          <PlanetForm planetDetails={selectedPlanet} />
+          <PlanetForm
+            planetDetails={selectedPlanet}
+            onSubmitForm={handleSubmitForm}
+            onCloseModal={() => setIsModalOpen(false)}
+          />
         </Modal>
       )}
     </PageLayout>

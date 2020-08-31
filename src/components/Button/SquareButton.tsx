@@ -11,8 +11,14 @@ const StyledButton = styled.button<ButtonProps>`
   color: ${(props) => props.color || "#000"};
 `;
 
-const SquareButton = (props: { onClick?: () => void; children: React.ReactNode; color?: string; bgColor?: string }) => (
-  <StyledButton bgColor={props.bgColor} color={props.color} onClick={props.onClick}>
+const SquareButton = (props: {
+  onClick?: () => void;
+  children: React.ReactNode;
+  color?: string;
+  bgColor?: string;
+  type?: "button" | "submit" | "reset" | undefined;
+}) => (
+  <StyledButton bgColor={props.bgColor} color={props.color} type={props.type} onClick={props.onClick}>
     {props.children}
   </StyledButton>
 );

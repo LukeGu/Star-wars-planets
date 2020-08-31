@@ -7,15 +7,16 @@ type PageNavProps = {
 
 const Wrapper = styled.div`
   display: inline-block;
+  margin: 2rem 0;
 `;
 
 const PageNav = styled.a<PageNavProps>`
   float: left;
   padding: 8px 16px;
   text-decoration: none;
-  border: ${(props) => (props.isActive ? "1px solid #4CAF50" : "1px solid #ddd")};
-  background-color: ${(props) => (props.isActive ? "#4CAF50" : "#fff")};
-  color: ${(props) => (props.isActive ? "#fff" : "#000")};
+  border: ${(props) => (props.isActive ? "1px solid #3273c5" : "1px solid #ddd")};
+  background-color: ${(props) => (props.isActive ? "#3273c5" : "transparent")};
+  color: ${(props) => (props.isActive ? "#fff" : "#999")};
   &:first-child {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -25,7 +26,7 @@ const PageNav = styled.a<PageNavProps>`
     border-bottom-right-radius: 5px;
   }
   &:hover {
-    background-color: #ddd;
+    background-color: #dddddd;
   }
 `;
 
@@ -40,9 +41,17 @@ const Pagination = (props: { totalNum: number; currentNum: number; getPageNumber
   }
   return (
     <Wrapper>
-      {props.currentNum !== 1 && <PageNav href="#">&laquo;</PageNav>}
+      {props.currentNum !== 1 && (
+        <PageNav href="#" onClick={() => props.getPageNumber(props.currentNum - 1)}>
+          &laquo;
+        </PageNav>
+      )}
       {navs}
-      {props.currentNum !== props.totalNum && <PageNav href="#">&raquo;</PageNav>}
+      {props.currentNum !== props.totalNum && (
+        <PageNav href="#" onClick={() => props.getPageNumber(props.currentNum + 1)}>
+          &raquo;
+        </PageNav>
+      )}
     </Wrapper>
   );
 };

@@ -5,6 +5,7 @@ import searchIcon from "../../assets/icon_search.svg";
 export const SearchForm = styled.form`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   border-radius: 0.3rem;
   background-color: #343434;
   box-shadow: none;
@@ -12,6 +13,7 @@ export const SearchForm = styled.form`
   width: 15rem;
   opacity: 0.7;
   height: 2.5rem;
+  padding: 0 0.8rem;
   transition: opacity 350ms;
   &:focus-within {
     opacity: 1;
@@ -20,14 +22,17 @@ export const SearchForm = styled.form`
 
 export const SearchInput = styled.input`
   display: inline-block;
-  width: 80%;
+  width: calc(100% - 1.5rem);
   height: 100%;
   visibility: visible;
   color: #fff;
   background-color: transparent;
-  padding-left: 0.8rem;
   outline: none;
   border: none;
+  &::placeholder {
+    font-family: "Ropa Sans", sans-serif;
+    font-size: 1rem;
+  }
 `;
 
 export const SearchBtn = styled.button`

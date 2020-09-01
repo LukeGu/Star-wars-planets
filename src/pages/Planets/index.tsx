@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 // components
 import { PageLayout, SearchBar, PlanetsTable, Pagination, Modal, PlanetForm } from "../../components/index";
-import { TitleSection, Title } from "./styled";
+import { TitleSection, Title, SearchSection } from "./styled";
 // interface
 import { PlanetValue } from "../../interface";
 // utils
@@ -12,26 +12,71 @@ const PlanetsPage = () => {
   const [planetsData, setPlanetsData] = useState<PlanetValue[]>([]);
   const [selectedPlanet, setSelectedPlanet] = useState<PlanetValue>({ name: "", population: "", climate: "", url: "" });
   const [pageNumber, setPageNumber] = useState<number>(1);
+  const [totalPageNumber, setTotalPageNumber] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isSearchResults, setIsSearchResults] = useState<boolean>(false);
+  const [searchItem, setSearchItem] = useState<string>("");
+  const [resultsCount, setResultsCount] = useState<number>(0);
+
   useEffect(() => {
+    const storedData = localStorage.getItem(pageNumber.toString());
+    if (isSearchResults) {
+      handleSearchData();
+    } else {
+      if (storedData) {
+        setPlanetsData(JSON.parse(storedData));
+        setTotalPageNumber(Number(localStorage.getItem("totalPages")));
+      } else handleLoadData();
+    }
+    // eslint-disable-next-line
+  }, [pageNumber]);
+
+  const handleLoadData = () => {
     axios({
       method: "get",
       url: `https://swapi.dev/api/planets/?page=${pageNumber}`,
       responseType: "stream",
     })
       .then((data) => {
-        console.log("planets", data.data.results);
+        const format = formatData(data);
+        const storedCount = localStorage.getItem("totalPages");
+        setPlanetsData(format);
+        localStorage.setItem(pageNumber.toString(), JSON.stringify(format));
+        if (storedCount) {
+          setTotalPageNumber(Number(storedCount));
+        } else {
+          const totalPages = Math.ceil(data.data.count / 10);
+          setTotalPageNumber(totalPages);
+          localStorage.setItem("totalPages", totalPages.toString());
+        }
+      })
+      .catch((err) => console.log("err", err.message));
+  };
+
+  const handleSearchData = () => {
+    axios({
+      method: "get",
+      url: `https://swapi.dev/api/planets/?search=${searchItem}&page=${pageNumber}`,
+      responseType: "stream",
+    })
+      .then((data) => {
+        console.log("data", data);
         setPlanetsData(formatData(data));
       })
       .catch((err) => console.log("err", err.message));
-  }, [pageNumber]);
+  };
 
   const handleGetPageNumber = (num: number) => {
     setPageNumber(num);
   };
 
-  const handleSearchPlanets = (data: PlanetValue[]) => {
+  const handleSearchPlanets = (data: PlanetValue[], totalResults: number, searchValue: string) => {
     setPlanetsData(data);
+    setIsSearchResults(true);
+    setResultsCount(totalResults);
+    setTotalPageNumber(Math.ceil(totalResults / 10));
+    setSearchItem(searchValue);
+    setPageNumber(1);
   };
 
   const handleSelectPlanet = (data: PlanetValue) => {
@@ -49,7 +94,14 @@ const PlanetsPage = () => {
       data
     );
     setPlanetsData(tmpData);
-    console.log("new planet info", data);
+    localStorage.setItem(pageNumber.toString(), JSON.stringify(tmpData));
+  };
+
+  const handleCleanSearchResults = () => {
+    handleLoadData();
+    setIsSearchResults(false);
+    setSearchItem("");
+    setPageNumber(1);
   };
 
   return (
@@ -58,9 +110,16 @@ const PlanetsPage = () => {
         <Title>star wars planets</Title>
         <SearchBar getSearchPlanets={handleSearchPlanets} />
       </TitleSection>
-
+      {isSearchResults && (
+        <SearchSection>
+          <p>{`${resultsCount} results for "${searchItem}"`}</p>
+          <button onClick={handleCleanSearchResults}>clean results x</button>
+        </SearchSection>
+      )}
       <PlanetsTable planets={planetsData} onEdit={handleSelectPlanet} />
-      <Pagination totalNum={6} currentNum={pageNumber} getPageNumber={handleGetPageNumber} />
+      {totalPageNumber > 1 && (
+        <Pagination totalNum={totalPageNumber} currentNum={pageNumber} getPageNumber={handleGetPageNumber} />
+      )}
       {isModalOpen && (
         <Modal onClose={() => setIsModalOpen(false)}>
           <PlanetForm

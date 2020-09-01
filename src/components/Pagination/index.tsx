@@ -41,13 +41,13 @@ const Pagination = (props: { totalNum: number; currentNum: number; getPageNumber
   }
   return (
     <Wrapper>
-      {props.currentNum !== 1 && (
+      {props.currentNum !== 1 && props.totalNum > 3 && (
         <PageNav href="#" onClick={() => props.getPageNumber(props.currentNum - 1)}>
           &laquo;
         </PageNav>
       )}
       {navs}
-      {props.currentNum !== props.totalNum && (
+      {props.currentNum !== props.totalNum && props.totalNum > 3 && (
         <PageNav href="#" onClick={() => props.getPageNumber(props.currentNum + 1)}>
           &raquo;
         </PageNav>

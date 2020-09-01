@@ -8,7 +8,7 @@ export const TitleSection = styled.div`
   border-top: 2px solid rgba(170, 170, 170, 0.25);
   border-bottom: 2px solid rgba(170, 170, 170, 0.25);
   margin: 1rem 0 1.5rem;
-  padding: 0.65rem 12px 0.4rem;
+  padding: 0.65rem 0.6rem 0.4rem;
   box-sizing: border-box;
 `;
 
@@ -28,3 +28,15 @@ export const FormFooter = styled.div`
   justify-content: flex-end;
   border-top: 1px solid #c7c7c7;
 `;
+
+export const SearchSection = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  padding: 0.65rem 0.6rem 0.4rem;
+`;
+
+// export const SearchSection = styled.div`
+//   color: #fff;
+// `;

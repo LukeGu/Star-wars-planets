@@ -17,7 +17,8 @@ export const ModalBody = styled.div`
   z-index: 1050;
   width: 100%;
   max-width: 40rem;
-  background-color: #fefefe;
+  background-color: #012839;
+  color: #fff;
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
 `;
 
@@ -38,6 +39,15 @@ export const ModalTitle = styled.h3`
 
 export const ModalContent = styled.div`
   padding: 1.5rem;
+`;
+
+export const ModalCloseBtn = styled.button`
+  font-size: 2rem;
+  padding: 0 0.6rem;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
 `;
 
 export const Backdrop = styled.div`

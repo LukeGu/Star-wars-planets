@@ -1,9 +1,11 @@
 import React, { useState, ChangeEvent } from "react";
 // components
 import { FormItem, FormFooter } from "./styled";
-import { SquareButton as Button } from "../../components/index";
+import { SquareButton as Button, Checkbox } from "../../components/index";
 // interface
 import { PlanetValue } from "../../interface";
+
+const checkboxGroup = ["Temperate", "Arid", "Tropical", "Murky"];
 
 const PlanetForm = (props: {
   planetDetails: PlanetValue;
@@ -67,42 +69,15 @@ const PlanetForm = (props: {
       </FormItem>
       <FormItem>
         <label htmlFor="climate">Climate:</label>
-        <input
-          type="checkbox"
-          id="climate1"
-          name="climate"
-          value="temperate"
-          checked={details.climate.includes("temperate")}
-          onChange={(e: ChangeEvent) => handleUpdateInfo(e)}
-        />
-        <label htmlFor="climate1"> Temperate</label>
-        <input
-          type="checkbox"
-          id="climate2"
-          name="climate"
-          value="arid"
-          checked={details.climate.includes("arid")}
-          onChange={(e: ChangeEvent) => handleUpdateInfo(e)}
-        />
-        <label htmlFor="climate2"> Arid</label>
-        <input
-          type="checkbox"
-          id="climate3"
-          name="climate"
-          value="tropical"
-          checked={details.climate.includes("tropical")}
-          onChange={(e: ChangeEvent) => handleUpdateInfo(e)}
-        />
-        <label htmlFor="climate3"> Tropical</label>
-        <input
-          type="checkbox"
-          id="climate4"
-          name="climate"
-          value="murky"
-          checked={details.climate.includes("murky")}
-          onChange={(e: ChangeEvent) => handleUpdateInfo(e)}
-        />
-        <label htmlFor="climate4"> Murky</label>
+        {checkboxGroup.map((item, index) => (
+          <Checkbox
+            key={`climate${index}`}
+            checked={details.climate.includes(item)}
+            name="climate"
+            value={item}
+            onChange={(e: ChangeEvent) => handleUpdateInfo(e)}
+          />
+        ))}
       </FormItem>
       <FormFooter>
         <Button type="submit">Submit</Button>

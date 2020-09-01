@@ -1,6 +1,6 @@
 import React from "react";
 // components
-import { ModalWrapper, ModalBody, ModalHeader, ModalContent, ModalTitle, Backdrop } from "./styled";
+import { ModalWrapper, ModalBody, ModalHeader, ModalContent, ModalTitle, ModalCloseBtn, Backdrop } from "./styled";
 
 const Modal = (props: { onClose: () => void; children: React.ReactNode }) => {
   return (
@@ -8,9 +8,7 @@ const Modal = (props: { onClose: () => void; children: React.ReactNode }) => {
       <ModalBody>
         <ModalHeader>
           <ModalTitle>Update Planet&apos;s Info</ModalTitle>
-          <button onClick={props.onClose} className="close">
-            ×
-          </button>
+          <ModalCloseBtn onClick={props.onClose}>×</ModalCloseBtn>
         </ModalHeader>
         <ModalContent>{props.children}</ModalContent>
       </ModalBody>

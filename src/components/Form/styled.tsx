@@ -4,6 +4,9 @@ export const FormItem = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
+  /* @media screen and (max-with:){
+    flex-direction: column;
+  } */
 `;
 
 export const FormFooter = styled.div`

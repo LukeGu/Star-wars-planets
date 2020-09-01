@@ -1,11 +1,11 @@
 import React, { useState, ChangeEvent } from "react";
 // components
 import { FormItem, FormFooter } from "./styled";
-import { SquareButton as Button, Checkbox } from "../../components/index";
+import { SquareButton as Button, Checkbox, Slider, TextInput } from "../../components/index";
 // interface
 import { PlanetValue } from "../../interface";
 
-const checkboxGroup = ["Temperate", "Arid", "Tropical", "Murky"];
+const checkboxGroup = ["temperate", "arid", "tropical", "murky"];
 
 const PlanetForm = (props: {
   planetDetails: PlanetValue;
@@ -39,30 +39,14 @@ const PlanetForm = (props: {
     <form onSubmit={(e: React.FormEvent) => props.onSubmitForm(details, e)}>
       <FormItem>
         <label htmlFor="name">Planet name:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={details.name}
-          maxLength={10}
-          onChange={(e: ChangeEvent) => handleUpdateInfo(e)}
-        />
+        <TextInput name="name" value={details.name} maxLength={10} onChange={(e: ChangeEvent) => handleUpdateInfo(e)} />
       </FormItem>
       <FormItem>
         <label htmlFor="population">Population:</label>
-        <input
-          type="range"
-          id="population"
+        <Slider
           name="population"
           min="0"
           max="2000000000"
-          value={details.population === "unknown" ? "0" : details.population}
-          onChange={(e: ChangeEvent) => handleUpdateInfo(e)}
-        />
-        <input
-          type="text"
-          id="population-text"
-          name="population"
           value={details.population === "unknown" ? "0" : details.population}
           onChange={(e: ChangeEvent) => handleUpdateInfo(e)}
         />

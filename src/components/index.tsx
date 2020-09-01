@@ -5,6 +5,8 @@ export { default as Footer } from "./Footer/index";
 export { default as PlanetButton } from "./Button/PlanetButton";
 export { default as SquareButton } from "./Button/SquareButton";
 export { default as Checkbox } from "./Button/Checkbox";
+export { default as Slider } from "./Slider/index";
+export { default as TextInput } from "./TextInput/index";
 export { default as SearchBar } from "./SearchBar/index";
 export { default as PlanetsTable } from "./Table/PlanetsTable";
 export { default as Pagination } from "./Pagination/index";

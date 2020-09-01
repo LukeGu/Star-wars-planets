@@ -7,19 +7,22 @@ import { SearchForm, SearchInput, SearchBtn } from "./styled";
 // utils
 import { formatData } from "../../util";
 
-const SearchBar = (props: { getSearchPlanets: (data: PlanetValue[]) => void }) => {
+const SearchBar = (props: {
+  getSearchPlanets: (data: PlanetValue[], totalResults: number, searchValue: string) => void;
+}) => {
   const [searchText, setSearchText] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     axios({
       method: "get",
+      // https://swapi.dev/api/planets/?search=${searchText}&page=${currentPage}
       url: `https://swapi.dev/api/planets/?search=${searchText}`,
       responseType: "stream",
     })
       .then((data) => {
-        props.getSearchPlanets(formatData(data));
-        console.log("search result", data);
+        console.log("data", data);
+        props.getSearchPlanets(formatData(data), data.data.count, searchText);
         setSearchText("");
       })
       .catch((err) => console.log("err", err.message));

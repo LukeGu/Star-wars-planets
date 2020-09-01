@@ -13,7 +13,6 @@ const PlanetForm = (props: {
   onCloseModal: () => void;
 }) => {
   const [details, setDetails] = useState<PlanetValue>(props.planetDetails);
-  //   console.log("PlanetForm", details);
   const handleUpdateInfo = (e: ChangeEvent) => {
     const element = e.currentTarget as HTMLInputElement;
     let newValue;
@@ -28,7 +27,6 @@ const PlanetForm = (props: {
     } else {
       newValue = element.value;
     }
-    console.log("details", newValue);
     setDetails({
       ...details,
       [element.name]: newValue,

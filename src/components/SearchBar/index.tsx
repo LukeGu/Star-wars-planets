@@ -19,6 +19,8 @@ const SearchBar = (props: { getSearchPlanets: (data: PlanetValue[]) => void }) =
     })
       .then((data) => {
         props.getSearchPlanets(formatData(data));
+        console.log("search result", data);
+        setSearchText("");
       })
       .catch((err) => console.log("err", err.message));
   };

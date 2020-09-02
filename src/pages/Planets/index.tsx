@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 // components
-import { PageLayout, SearchBar, PlanetsTable, Pagination, Modal, PlanetForm } from "../../components/index";
+import { PageLayout, SearchBar, PlanetsTable, Pagination, Modal, PlanetForm, PopUpMsg } from "../../components/index";
 import { TitleSection, Title, SearchSection } from "./styled";
 // interface
 import { PlanetValue } from "../../interface";
@@ -17,6 +17,7 @@ const PlanetsPage = () => {
   const [isSearchResults, setIsSearchResults] = useState<boolean>(false);
   const [searchItem, setSearchItem] = useState<string>("");
   const [resultsCount, setResultsCount] = useState<number>(0);
+  const [errMsg, setErrMsg] = useState<string>("");
 
   useEffect(() => {
     const storedData = localStorage.getItem(pageNumber.toString());
@@ -50,7 +51,7 @@ const PlanetsPage = () => {
           localStorage.setItem("totalPages", totalPages.toString());
         }
       })
-      .catch((err) => console.log("err", err.message));
+      .catch((err) => setErrMsg(err.message));
   };
 
   const handleSearchData = () => {
@@ -60,10 +61,9 @@ const PlanetsPage = () => {
       responseType: "stream",
     })
       .then((data) => {
-        console.log("data", data);
         setPlanetsData(formatData(data));
       })
-      .catch((err) => console.log("err", err.message));
+      .catch((err) => setErrMsg(err.message));
   };
 
   const handleGetPageNumber = (num: number) => {
@@ -129,6 +129,7 @@ const PlanetsPage = () => {
           />
         </Modal>
       )}
+      {errMsg !== "" && <PopUpMsg message={errMsg} onClose={() => setErrMsg("")} />}
     </PageLayout>
   );
 };

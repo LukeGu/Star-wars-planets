@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 // components
-import { PageLayout, SearchBar, PlanetsTable, Pagination, Modal, PlanetForm, PopUpMsg } from "../../components/index";
-import { TitleSection, Title, SearchSection } from "./styled";
+import {
+  PageLayout,
+  SearchBar,
+  PlanetsTable,
+  Pagination,
+  Modal,
+  PlanetForm,
+  PopUpMsg,
+  Spinner,
+} from "../../components/index";
+import { TitleSection, Title, SearchSection, CleanBtn } from "./styled";
 // interface
 import { PlanetValue } from "../../interface";
 // utils
@@ -18,6 +27,7 @@ const PlanetsPage = () => {
   const [searchItem, setSearchItem] = useState<string>("");
   const [resultsCount, setResultsCount] = useState<number>(0);
   const [errMsg, setErrMsg] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const storedData = localStorage.getItem(pageNumber.toString());
@@ -33,6 +43,7 @@ const PlanetsPage = () => {
   }, [pageNumber]);
 
   const handleLoadData = () => {
+    setIsLoading(true);
     axios({
       method: "get",
       url: `https://swapi.dev/api/planets/?page=${pageNumber}`,
@@ -50,11 +61,16 @@ const PlanetsPage = () => {
           setTotalPageNumber(totalPages);
           localStorage.setItem("totalPages", totalPages.toString());
         }
+        setIsLoading(false);
       })
-      .catch((err) => setErrMsg(err.message));
+      .catch((err) => {
+        setErrMsg(err.message);
+        setIsLoading(false);
+      });
   };
 
   const handleSearchData = () => {
+    setIsLoading(true);
     axios({
       method: "get",
       url: `https://swapi.dev/api/planets/?search=${searchItem}&page=${pageNumber}`,
@@ -62,8 +78,12 @@ const PlanetsPage = () => {
     })
       .then((data) => {
         setPlanetsData(formatData(data));
+        setIsLoading(false);
       })
-      .catch((err) => setErrMsg(err.message));
+      .catch((err) => {
+        setErrMsg(err.message);
+        setIsLoading(false);
+      });
   };
 
   const handleGetPageNumber = (num: number) => {
@@ -113,10 +133,10 @@ const PlanetsPage = () => {
       {isSearchResults && (
         <SearchSection>
           <p>{`${resultsCount} results for "${searchItem}"`}</p>
-          <button onClick={handleCleanSearchResults}>clean results x</button>
+          <CleanBtn onClick={handleCleanSearchResults}>clean results</CleanBtn>
         </SearchSection>
       )}
-      <PlanetsTable planets={planetsData} onEdit={handleSelectPlanet} />
+      {(!isSearchResults || resultsCount > 0) && <PlanetsTable planets={planetsData} onEdit={handleSelectPlanet} />}
       {totalPageNumber > 1 && (
         <Pagination totalNum={totalPageNumber} currentNum={pageNumber} getPageNumber={handleGetPageNumber} />
       )}
@@ -129,6 +149,7 @@ const PlanetsPage = () => {
           />
         </Modal>
       )}
+      {isLoading && <Spinner />}
       {errMsg !== "" && <PopUpMsg message={errMsg} onClose={() => setErrMsg("")} />}
     </PageLayout>
   );

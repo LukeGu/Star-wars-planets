@@ -5,6 +5,7 @@ import logoImg from "../../assets/vader.jpg";
 
 const Wrapper = styled.footer`
   width: 100%;
+  height: 12rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,7 +15,6 @@ const Wrapper = styled.footer`
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  min-height: 14rem;
   opacity: 0.8;
 `;
 

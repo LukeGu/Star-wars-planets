@@ -1,10 +1,10 @@
 import React from "react";
 // components
-import { Table, Tr, Th, Td, EditBtn } from "./styled";
+import { Table, Tr, Th, Td, EditIcon } from "./styled";
 // interface
 import { PlanetValue } from "../../interface";
-
-const EditTd = { display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer" };
+// assets
+import editIcon from "../../assets/edit.svg";
 
 const PlanetsTable = (props: { planets: PlanetValue[]; onEdit: (data: PlanetValue) => void }) => {
   return (
@@ -21,8 +21,8 @@ const PlanetsTable = (props: { planets: PlanetValue[]; onEdit: (data: PlanetValu
             <Td>{planet.name}</Td>
             <Td>{planet.population}</Td>
             <Td>{planet.climate}</Td>
-            <Td style={EditTd} onClick={() => props.onEdit(planet)}>
-              <EditBtn>&gt;</EditBtn>
+            <Td style={{ cursor: "pointer" }} onClick={() => props.onEdit(planet)}>
+              <EditIcon alt="edit" src={editIcon} />
             </Td>
           </Tr>
         ))}

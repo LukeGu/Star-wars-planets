@@ -3,7 +3,7 @@ import axios from "axios";
 // interface
 import { PlanetValue } from "../../interface";
 // components
-import { PopUpMsg } from "../index";
+import { PopUpMsg, Spinner } from "../index";
 import { SearchForm, SearchInput, SearchBtn } from "./styled";
 // utils
 import { formatData } from "../../util";
@@ -13,19 +13,25 @@ const SearchBar = (props: {
 }) => {
   const [searchText, setSearchText] = useState<string>("");
   const [errMsg, setErrMsg] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     axios({
       method: "get",
-      url: `https://swapi.dev/api/planets/?search=${searchText}?page=80`,
+      url: `https://swapi.dev/api/planets/?search=${searchText}`,
       responseType: "stream",
     })
       .then((data) => {
         props.getSearchPlanets(formatData(data), data.data.count, searchText);
         setSearchText("");
+        setIsLoading(false);
       })
-      .catch((err) => setErrMsg(err.message));
+      .catch((err) => {
+        setErrMsg(err.message);
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -39,6 +45,7 @@ const SearchBar = (props: {
         />
         <SearchBtn type="submit" />
       </SearchForm>
+      {isLoading && <Spinner />}
       {errMsg !== "" && <PopUpMsg message={errMsg} onClose={() => setErrMsg("")} />}
     </>
   );

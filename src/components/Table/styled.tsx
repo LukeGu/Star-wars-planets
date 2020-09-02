@@ -31,7 +31,8 @@ export const Tr = styled.tr`
   }
 `;
 
-export const EditBtn = styled.div`
-  width: fit-content;
-  transform: rotate(90deg);
+export const EditIcon = styled.img`
+  display: block;
+  margin: 0 auto;
+  width: 1.4rem;
 `;

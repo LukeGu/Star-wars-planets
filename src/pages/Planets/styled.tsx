@@ -37,6 +37,12 @@ export const SearchSection = styled.div`
   padding: 0.65rem 0.6rem 0.4rem;
 `;
 
-// export const SearchSection = styled.div`
-//   color: #fff;
-// `;
+export const CleanBtn = styled.button`
+  border: none;
+  padding: 0.2rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.2rem;
+  background-color: #343434;
+  color: #ddd;
+  cursor: pointer;
+`;

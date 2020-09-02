@@ -8,6 +8,7 @@ export { default as Checkbox } from "./Button/Checkbox";
 export { default as Slider } from "./Slider/index";
 export { default as TextInput } from "./TextInput/index";
 export { default as PopUpMsg } from "./PopUp/MessageBox";
+export { default as Spinner } from "./Spinner/Loading";
 export { default as SearchBar } from "./SearchBar/index";
 export { default as PlanetsTable } from "./Table/PlanetsTable";
 export { default as Pagination } from "./Pagination/index";

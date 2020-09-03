@@ -17,10 +17,11 @@ const PlanetForm = (props: {
     const element = e.currentTarget as HTMLInputElement;
     let newValue;
     if (element.name === "climate") {
-      const climateArray = details.climate === "" ? [] : details.climate.split(", ");
-      if (details.climate.includes(element.value))
+      const climateArray = details.climate === "unknown" ? [] : details.climate.split(", ");
+      if (details.climate.includes(element.value)) {
         newValue = climateArray.filter((item) => item !== element.value.toString()).join(", ");
-      else {
+        if (newValue === "") newValue = "unknown";
+      } else {
         climateArray.push(element.value.toString());
         newValue = climateArray.length === 1 ? climateArray.join("") : climateArray.join(", ");
       }
@@ -41,13 +42,17 @@ const PlanetForm = (props: {
       </FormItem>
       <FormItem>
         <FormLabel htmlFor="population">Population:</FormLabel>
-        <Slider
-          name="population"
-          min="0"
-          max="2000000000"
-          value={details.population === "unknown" ? "0" : details.population}
-          onChange={(e: ChangeEvent) => handleUpdateInfo(e)}
-        />
+        {Number(details.population) > 2000000000 ? (
+          <TextInput name="population" value={details.population} onChange={(e: ChangeEvent) => handleUpdateInfo(e)} />
+        ) : (
+          <Slider
+            name="population"
+            min="0"
+            max="2000000000"
+            value={details.population === "unknown" ? "0" : details.population}
+            onChange={(e: ChangeEvent) => handleUpdateInfo(e)}
+          />
+        )}
       </FormItem>
       <FormItem>
         <FormLabel htmlFor="climate">Climate:</FormLabel>

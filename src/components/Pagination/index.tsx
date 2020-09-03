@@ -27,6 +27,10 @@ const PageNav = styled.a<PageNavProps>`
   }
   &:hover {
     background-color: #dddddd;
+    color: #343434;
+  }
+  @media screen and (max-width: 35rem) {
+    padding: 5px 10px;
   }
 `;
 

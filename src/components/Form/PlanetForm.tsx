@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent } from "react";
 // components
-import { FormItem, FormFooter } from "./styled";
+import { FormItem, FormLabel, FormFooter } from "./styled";
 import { SquareButton as Button, Checkbox, Slider, TextInput } from "../../components/index";
 // interface
 import { PlanetValue } from "../../interface";
@@ -36,11 +36,11 @@ const PlanetForm = (props: {
   return (
     <form onSubmit={(e: React.FormEvent) => props.onSubmitForm(details, e)}>
       <FormItem>
-        <label htmlFor="name">Planet name:</label>
+        <FormLabel htmlFor="name">Planet name:</FormLabel>
         <TextInput name="name" value={details.name} maxLength={10} onChange={(e: ChangeEvent) => handleUpdateInfo(e)} />
       </FormItem>
       <FormItem>
-        <label htmlFor="population">Population:</label>
+        <FormLabel htmlFor="population">Population:</FormLabel>
         <Slider
           name="population"
           min="0"
@@ -50,7 +50,7 @@ const PlanetForm = (props: {
         />
       </FormItem>
       <FormItem>
-        <label htmlFor="climate">Climate:</label>
+        <FormLabel htmlFor="climate">Climate:</FormLabel>
         {checkboxGroup.map((item, index) => (
           <Checkbox
             key={`climate${index}`}
@@ -63,7 +63,9 @@ const PlanetForm = (props: {
       </FormItem>
       <FormFooter>
         <Button type="submit">Submit</Button>
-        <Button onClick={props.onCloseModal}>Cancel</Button>
+        <Button onClick={props.onCloseModal} color="#c8453c">
+          Cancel
+        </Button>
       </FormFooter>
     </form>
   );

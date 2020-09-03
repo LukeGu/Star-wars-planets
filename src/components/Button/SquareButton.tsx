@@ -32,7 +32,7 @@ const StyledButton = styled.button<ButtonProps>`
   display: inline-block;
   position: relative;
   text-align: center;
-  border: 1px solid #00c7ec;
+  border: ${(props) => `1px solid ${props.color || "#00c7ec"}`};
   border-radius: 5px;
   padding: 0.5rem 1rem;
   box-shadow: 0 0 0 0 transparent;
@@ -40,7 +40,7 @@ const StyledButton = styled.button<ButtonProps>`
   &:hover {
     color: white;
     box-shadow: 0 0 30px 0 rgba(0, 199, 236, 0.5);
-    background-color: #00c7ec;
+    background-color: ${(props) => props.color || "#00c7ec"};
     transition: all 0.2s ease-out;
     &:before {
       animation: ${shine} 0.5s 0s linear;

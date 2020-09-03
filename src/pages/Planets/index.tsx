@@ -102,11 +102,21 @@ const PlanetsPage = () => {
   const handleSelectPlanet = (data: PlanetValue) => {
     setSelectedPlanet(data);
     setIsModalOpen(true);
+    document.body.style.overflow = "hidden";
+    window.scrollTo({
+      top: 0,
+      behavior: "auto",
+    });
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    document.body.style.overflow = "unset";
   };
 
   const handleSubmitForm = (data: PlanetValue, e: React.FormEvent) => {
     e.preventDefault();
-    setIsModalOpen(false);
+    handleCloseModal();
     const tmpData = [...planetsData];
     tmpData.splice(
       tmpData.findIndex((planet) => planet.url === data.url),
@@ -141,12 +151,8 @@ const PlanetsPage = () => {
         <Pagination totalNum={totalPageNumber} currentNum={pageNumber} getPageNumber={handleGetPageNumber} />
       )}
       {isModalOpen && (
-        <Modal onClose={() => setIsModalOpen(false)}>
-          <PlanetForm
-            planetDetails={selectedPlanet}
-            onSubmitForm={handleSubmitForm}
-            onCloseModal={() => setIsModalOpen(false)}
-          />
+        <Modal onClose={handleCloseModal}>
+          <PlanetForm planetDetails={selectedPlanet} onSubmitForm={handleSubmitForm} onCloseModal={handleCloseModal} />
         </Modal>
       )}
       {isLoading && <Spinner />}

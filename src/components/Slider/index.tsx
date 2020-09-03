@@ -7,6 +7,9 @@ type RangeProps = {
 
 const Wrapper = styled.div`
   width: 50%;
+  @media screen and (max-width: 35rem) {
+    width: 100%;
+  }
 `;
 
 const Range = styled.input.attrs({ type: "range" })<RangeProps>`
@@ -46,6 +49,7 @@ const TextInput = styled.input.attrs({ type: "text" })`
   padding: 0.2rem;
   border: none;
   text-align: right;
+  border-bottom: 1px solid;
   cursor: pointer;
 `;
 

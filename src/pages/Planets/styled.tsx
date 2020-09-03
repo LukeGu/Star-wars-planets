@@ -10,6 +10,11 @@ export const TitleSection = styled.div`
   margin: 1rem 0 1.5rem;
   padding: 0.65rem 0.6rem 0.4rem;
   box-sizing: border-box;
+  @media screen and (max-width: 35rem) {
+    flex-flow: column;
+    align-items: self-start;
+    padding-bottom: 1.2rem;
+  }
 `;
 
 export const Title = styled.h2`

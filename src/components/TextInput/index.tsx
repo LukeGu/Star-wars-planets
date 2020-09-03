@@ -18,7 +18,7 @@ const StyledInput = styled.input.attrs({ type: "text" })`
 const TextInput = (props: {
   name: string;
   value: string;
-  maxLength: number;
+  maxLength?: number;
   onChange: (e: React.ChangeEvent) => void;
 }) => <StyledInput name={props.name} value={props.value} maxLength={props.maxLength} onChange={props.onChange} />;
 

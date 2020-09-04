@@ -38,12 +38,23 @@ const PlanetForm = (props: {
     <form onSubmit={(e: React.FormEvent) => props.onSubmitForm(details, e)}>
       <FormItem>
         <FormLabel htmlFor="name">Planet name:</FormLabel>
-        <TextInput name="name" value={details.name} maxLength={10} onChange={(e: ChangeEvent) => handleUpdateInfo(e)} />
+        <TextInput
+          name="name"
+          value={details.name}
+          type="text"
+          maxLength={10}
+          onChange={(e: ChangeEvent) => handleUpdateInfo(e)}
+        />
       </FormItem>
       <FormItem>
         <FormLabel htmlFor="population">Population:</FormLabel>
         {Number(details.population) > 2000000000 ? (
-          <TextInput name="population" value={details.population} onChange={(e: ChangeEvent) => handleUpdateInfo(e)} />
+          <TextInput
+            name="population"
+            value={details.population}
+            type="number"
+            onChange={(e: ChangeEvent) => handleUpdateInfo(e)}
+          />
         ) : (
           <Slider
             name="population"

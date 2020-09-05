@@ -33,6 +33,9 @@ export const SearchInput = styled.input`
     font-family: "Ropa Sans", sans-serif;
     font-size: 1rem;
   }
+  @media screen and (max-width: 35rem) {
+    font-size: 16px;
+  }
 `;
 
 export const SearchBtn = styled.button`

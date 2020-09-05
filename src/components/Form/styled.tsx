@@ -31,3 +31,17 @@ export const FormFooter = styled.div`
     width: 100%;
   }
 `;
+
+export const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  @media screen and (max-width: 35rem) {
+    align-items: flex-start;
+  }
+`;
+
+export const WarningMsg = styled.p`
+  margin-bottom: 0;
+  color: red;
+`;

@@ -7,6 +7,8 @@ export default {
     "^.+\\.tsx?$": "ts-jest",
   },
   setupFilesAfterEnv: ["@testing-library/react/cleanup-after-each", "@testing-library/jest-dom/extend-expect"],
+  setupTestFrameworkScriptFile: "<rootDir>src/setupTests.ts",
   testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+  snapshotSerializers: ["enzyme-to-json"],
 };

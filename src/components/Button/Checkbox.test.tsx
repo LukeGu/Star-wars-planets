@@ -1,12 +1,20 @@
 import React from "react";
 import { shallow } from "enzyme";
-import SquareButton from "./SquareButton";
+import Checkbox from "./Checkbox";
 
-describe("Test SquareButton", () => {
-  it("should call mock function when button is clicked", () => {
-    const mockFn = jest.fn();
-    const button = shallow(<SquareButton onClick={mockFn}>test</SquareButton>);
-    button.simulate("click");
+describe("Test Checkbox", () => {
+  const mockFn = jest.fn();
+  it("should be true when checkbox is checked", () => {
+    const wrapper = shallow(<Checkbox checked={true} value="test" name="test" onChange={mockFn} />);
+    expect(wrapper.find("FunctionalCheckbox").props().checked).toBeTruthy();
+  });
+  it("should be false when checkbox isn't checked", () => {
+    const wrapper = shallow(<Checkbox checked={false} value="test" name="test" onChange={mockFn} />);
+    expect(wrapper.find("FunctionalCheckbox").props().checked).toBeFalsy();
+  });
+  it("should call mock function when checkbox is clicked", () => {
+    const wrapper = shallow(<Checkbox checked={true} value="test" name="test" onChange={mockFn} />);
+    wrapper.find("FunctionalCheckbox").simulate("change");
     expect(mockFn).toHaveBeenCalled();
   });
 });

@@ -29,6 +29,8 @@ const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
   width: 1px;
 `;
 
+HiddenCheckbox.displayName = "FunctionalCheckbox";
+
 const StyledCheckbox = styled.div<CheckboxProps>`
   display: inline-block;
   width: 16px;

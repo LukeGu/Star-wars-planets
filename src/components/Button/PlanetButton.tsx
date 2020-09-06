@@ -18,6 +18,8 @@ const PlanetImg = styled.img`
   margin-top: -3rem;
 `;
 
+PlanetImg.displayName = "PlanetImg";
+
 const Text = styled.p`
   position: absolute;
   top: 6rem;

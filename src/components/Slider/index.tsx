@@ -32,6 +32,7 @@ const Range = styled.input.attrs({ type: "range" })<RangeProps>`
     border-radius: 4px;
   }
 `;
+Range.displayName = "Range";
 
 const InfoBox = styled.div`
   width: 100%;

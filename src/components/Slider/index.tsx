@@ -41,9 +41,9 @@ const InfoBox = styled.div`
   align-items: center;
 `;
 
-const TextInput = styled.input.attrs({ type: "text" })`
+const TextInput = styled.input.attrs({ type: "number" })`
   display: inline-block;
-  width: 6.2rem;
+  width: 6.5rem;
   font-size: 1.1rem;
   background: transparent;
   color: #fff;
@@ -74,11 +74,10 @@ const Slider = (props: {
       <InfoBox>
         <p>{props.min}</p>
         <div>
-          <TextInput value={props.value} />/ {props.max}
+          <TextInput value={props.value} name={props.name} onChange={props.onChange} autoComplete="off" /> / {props.max}
         </div>
       </InfoBox>
     </Wrapper>
   );
 };
-
 export default Slider;

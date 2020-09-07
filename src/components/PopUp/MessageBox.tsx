@@ -33,13 +33,19 @@ const CloseBtn = styled.span`
   }
 `;
 
-const MessageBox = (props: { message: string; onClose: () => void }) => (
-  <Wrapper>
-    <Container>
-      <CloseBtn onClick={props.onClose}>&times;</CloseBtn>
-      <strong>Error: </strong> {props.message}
-    </Container>
-  </Wrapper>
-);
+const MessageBox = (props: { message: string; onClose: () => void }) => {
+  setTimeout(() => {
+    props.onClose();
+  }, 3000);
+
+  return (
+    <Wrapper>
+      <Container>
+        <CloseBtn onClick={props.onClose}>&times;</CloseBtn>
+        <strong>Error: </strong> {props.message}
+      </Container>
+    </Wrapper>
+  );
+};
 
 export default MessageBox;
